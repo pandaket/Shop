@@ -1,0 +1,455 @@
+﻿@font-face {
+    font-family: 'Georgia Pro Cond';
+    src: url('GeorgiaPro-CondRegular.eot');
+    src: local('Georgia Pro Cond'), local('GeorgiaPro-CondRegular'), url('/lib/georgiapro/GeorgiaPro-CondRegular.eot') format('embedded-opentype'), url('/lib/georgiapro/GeorgiaPro-CondRegular.woff2') format('woff2'), url('/lib/georgiapro/GeorgiaPro-CondRegular.woff') format('woff'), url('/lib/georgiapro/GeorgiaPro-CondRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+}
+
+.footer-menu > div > ul > li {
+    font-family: 'Georgia Pro Cond';
+    font-weight: 700;
+    height: 30px;
+    font-size: 14px;
+    list-style: none;
+}
+
+.footer-menu > div > h6 {
+    font-family: 'Georgia Pro Cond';
+    font-weight: 700;
+}
+
+.menu-user::after {
+    display: none;
+}
+
+.menu-user .fa {
+    color: white;
+}
+
+.show > .account-menu {
+    display: block;
+    transform: none !important;
+    width: 50%;
+    margin-top: 16px;
+    left: auto;
+    right: 0;
+    max-height: 300px;
+}
+
+    .show > .account-menu > .divider {
+        height: 0.5px;
+        margin: 4px 4px;
+        overflow: hidden;
+        background-color: #e5e5e5;
+    }
+
+    .show > .account-menu:before {
+        content: '';
+        display: inline-block;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-bottom: 7px solid #ccc;
+        border-bottom-color: rgba(255, 255, 255, 0.8);
+        position: absolute;
+        top: -7px;
+        left: 90%;
+        color: white;
+    }
+
+    .show > .account-menu > li {
+        padding-left: 15px;
+    }
+
+        .show > .account-menu > li > form > a {
+            color: #999999;
+            font-size: 14px;
+        }
+
+    .show > .account-menu:after {
+        display: inline-block;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 6px solid #ffffff;
+        position: absolute;
+        top: -6px;
+        left: 10px;
+    }
+
+/*#region === Цветовые оформления ===*/
+.bg-cyan {
+    background-color: #D4E1F5 !important;
+}
+
+.border-cyan {
+    border-color: #D4E1F5 !important;
+}
+
+.bg-pink {
+    background-color: #ff989a !important;
+}
+
+.border-pink {
+    border-color: #ff989a !important;
+}
+
+.bg-green {
+    background-color: #e1f0d3 !important;
+}
+
+.border-green {
+    border-color: #e1f0d3 !important;
+}
+
+.btn-light {
+    background-color: white;
+    border-color: #dee2e6;
+}
+
+.bg-beige {
+    background-color: #fff1e3 !important;
+}
+
+.border-beige {
+    border-color: #fbe0c5 !important;
+}
+
+.bg-grey-l {
+    background-color: #f5f5f5 !important;
+}
+
+.border-grey-l {
+    border-color: #e9e8e8 !important;
+}
+
+.btn-outline-beige {
+    color: #d39557;
+    background-color: transparent;
+    background-image: none;
+    border-color: #e4ac74;
+}
+
+    .btn-outline-beige:hover {
+        color: #e4ac74;
+        background-color: #f5f5f5;
+        border-color: #f5f5f5;
+    }
+
+    .btn-outline-beige:focus, .btn-outline-beige.focus {
+        box-shadow: 0 0 0 0.2rem rgba(245,245,220, 0.8);
+    }
+
+    .btn-outline-beige.disabled, .btn-outline-beige:disabled {
+        color: #f5f5f5;
+        background-color: transparent;
+    }
+
+    .btn-outline-beige:not(:disabled):not(.disabled):active, .btn-outline-beige:not(:disabled):not(.disabled).active,
+    .show > .btn-outline-beige.dropdown-toggle {
+        color: #fff;
+        background-color: #f5f5f5;
+        border-color: #f5f5f5;
+    }
+
+        .btn-outline-beige:not(:disabled):not(.disabled):active:focus, .btn-outline-beige:not(:disabled):not(.disabled).active:focus,
+        .show > .btn-outline-beige.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(245,245,220, 0.8);
+        }
+/*#endregion */
+
+/*#region === Log in form*/
+
+.login-form {
+    background-color: #fff;
+    padding: 20px;
+    -webkit-box-shadow: 0 3px 50px 0 rgba(0,0,0,.1);
+    box-shadow: 0 3px 10px 0 rgba(0,0,0,1);
+    width: 400px;
+    max-height: 800px;    
+}
+
+    .login-form .form-group {
+        margin-bottom: 0;
+    }
+
+    .login-form h4, .login-form h5, .login-form h6 {
+        font-family: 'Georgia Pro Cond';
+        color: black;
+        text-align: center;
+    }
+
+    .login-form p {
+        font-family: 'Georgia Pro Cond';
+        color: black;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .login-form label {
+        font-family: 'Georgia Pro Cond';
+        color: black;
+        text-transform: capitalize;
+        font-weight: 700;
+        font-size: 14px;
+        padding-left: 5px;
+    }
+
+    .login-form h3 {
+        margin-bottom: 10px;
+        margin-top: 10px
+    }
+
+    .login-form .btn {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 5px;
+        background: #d2b48c;
+        border-color: black;
+    }
+
+    .login-form .divider {
+        margin-top: 5px;
+        margin-bottom: 25px;
+        color: black;
+    }
+
+    .login-form .form-control {
+        height: 40px;
+        background: rgba(222, 200, 171, 0.7);
+        box-shadow: 0 3px 50px 0 rgba(0,0,0,.1);
+        padding: 0 10px;
+        font-size: 14px;
+        font-weight: bold;
+        color: black;
+        transition: all 0.3s ease 0s;
+    }
+
+        .login-form .form-control:focus {
+            box-shadow: none;
+            outline: 0 none;
+            background: white;
+            border-color: black;
+            color:black;
+        }
+
+#warning {
+    padding-left: 5px;
+    margin: 5px 0px;
+    font-size: 12px;
+    color: red;
+}
+
+.basket-table{
+    width: 100%;
+}
+.basket-table th, .basket-table td{
+    vertical-align: middle;
+}
+/*#endregion*/
+
+
+.product-grid {
+    max-width: 60em;
+    margin: 2rem auto;
+}
+
+    .product-grid.product-grid-flexbox .product-grid-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .product-grid.product-grid-flexbox .product-grid-title {
+        height: auto;
+    }
+
+        .product-grid.product-grid-flexbox .product-grid-title:after {
+            display: none;
+        }
+
+.product-grid-wrapper {
+    margin-left: -1rem;
+    margin-right: -1rem;
+}
+
+.product-grid-product-wrapper {
+    padding: 1rem;
+    float: left;
+    width: 33.33333%;
+}
+
+.product-grid-product {
+    padding: 1rem;
+    position: relative;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 4px;
+}
+
+    .product-grid-product:hover {
+        box-shadow: 0px 0px 0px 1px #eee;
+        z-index: 50;
+    }
+
+        .product-grid-product:hover .product-grid-extend {
+            display: block;
+        }
+
+.product-grid-img-wrapper {
+    width: 100%;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    height: 150px;
+}
+
+.product-grid-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+}
+
+.product-grid-title {
+    margin-top: 0.875rem;
+    display: block;
+    font-size: 1.125em;
+    color: #222;
+    height: 3em;
+    overflow: hidden;
+    position: relative;
+}
+
+    .product-grid-title:after {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 2.4em;
+        height: 1.5em;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%);
+    }
+
+.product-grid-price {
+    color: #e4ac74;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+}
+
+.product-grid-extend-wrapper {
+    position: relative;
+}
+
+.product-grid-description {
+    font-size: 0.875em;
+    margin-top: 0.4375rem;
+    margin-bottom: 0;
+}
+
+.product-grid-btn {
+    display: inline-block;
+    font-size: 0.875em;
+    color: #777;
+    background: rgba(228, 172, 116, 0.71);
+    padding: 0.5em 0.625em;
+    margin-top: 0.875rem;
+    margin-right: 0.625rem;
+    cursor: pointer;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.product-grid-add-to-cart {
+    color: #fff;
+    background: #d39557;
+}
+
+    .product-grid-add-to-cart:hover {
+        background: #fbe0c5;
+    }
+
+.product-grid-view {
+    color: #777;
+    background: rgba(228, 172, 116, 0.2);
+}
+
+    .product-grid-view:hover {
+        background: rgba(228, 172, 116, 0.05);
+    }
+
+.product-checkbox .checkbox input[type="checkbox"] {
+    background-color: white;
+    border-color: black;
+}
+
+/* Customize the label (the container) */
+.product-container {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+    /* Hide the browser's default checkbox */
+    .product-container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    box-shadow: 0 3px 5px 0 rgba(0,0,0,.1);
+}
+
+/* On mouse-over, add a grey background color */
+.product-container:hover input ~ .checkmark {
+    background-color: white;
+}
+
+/* When the checkbox is checked, add a blue background */
+.product-container input:checked ~ .checkmark {
+    background-color: white;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.product-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.product-container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

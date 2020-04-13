@@ -1,0 +1,121 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Blazers</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-inline">
+                <a asp-controller="Home" asp-action="Index" class="mr-4">Главная</a>
+                <a class="mr-4">/</a>
+                <a asp-controller="Catalog" asp-action="Index" class="mr-4">Каталог</a>
+                <a class="mr-4">/</a>
+                <a class="mr-4">Юбки</a>
+                <a class="mr-4">/</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2" style="margin: 5rem auto;">
+            <div class="mb-5">
+                <h6>РАЗМЕР</h6>
+                <div class="product-checkbox">
+                    <div class="checkbox">
+                        <label class="product-container"><input type="checkbox" value=""><span class="checkmark"></span>XS</label>
+                    </div>
+                    <div class="checkbox">
+                        <label class="product-container"><input type="checkbox" value=""><span class="checkmark"></span>S</label>
+                    </div>
+                    <div class="checkbox">
+                        <label class="product-container"><input type="checkbox" value=""><span class="checkmark"></span>M</label>
+                    </div>
+                    <div class="checkbox">
+                        <label class="product-container"><input type="checkbox" value=""><span class="checkmark"></span>L</label>
+                    </div>
+                    <div class="checkbox">
+                        <label class="product-container"><input type="checkbox" value=""><span class="checkmark"></span>XL</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5 mb-5">
+                <h6>ЦЕНА</h6>
+                <div class="form-inline">
+                    <div class="input-container mb-3">
+                        <i class="mr-2">От</i>
+                        <input class="form-control mr-2" style="color:black;padding-top: 0px; width: 80px; height: 80%" />
+                    </div>
+                    <div class="input-container">
+                        <i class="mr-2">По</i>
+                        <input class="form-control" style="color:black;padding-top: 0px; width: 80px; height: 80%" />
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5 mb-5">
+                <h6>ЦВЕТ</h6>
+                <div class="product-checkbox">
+                    <div class="checkbox">
+                        <label class="product-container"><input type="checkbox" value=""><span class="checkmark"></span>Бежевый</label>
+                    </div>
+                    <div class="checkbox">
+                        <label class="product-container"><input type="checkbox" value=""><span class="checkmark"></span>Белый</label>
+                    </div>
+                    <div class="checkbox">
+                        <label class="product-container"><input type="checkbox" value=""><span class="checkmark"></span>Желтый</label>
+                    </div>
+                    <div class="checkbox">
+                        <label class="product-container"><input type="checkbox" value=""><span class="checkmark"></span>Зеленый</label>
+                    </div>
+                    <div class="checkbox">
+                        <label class="product-container"><input type="checkbox" value=""><span class="checkmark"></span>Коричневый</label>
+                    </div>
+                    <div class="checkbox">
+                        <label class="product-container"><input type="checkbox" value=""><span class="checkmark"></span>Красный</label>
+                    </div>
+                    <div class="checkbox">
+                        <label class="product-container"><input type="checkbox" value=""><span class="checkmark"></span>Оранжевый</label>
+                    </div>
+                    <div class="checkbox">
+                        <label class="product-container"><input type="checkbox" value=""><span class="checkmark"></span>Синий</label>
+                    </div>
+                    <div class="checkbox">
+                        <label class="product-container"><input type="checkbox" value=""><span class="checkmark"></span>Фиолетовый</label>
+                    </div>
+                    <div class="checkbox">
+                        <label class="product-container"><input type="checkbox" value=""><span class="checkmark"></span>Черный</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <!-- content here -->
+            <div class="product-grid product-grid-flexbox">
+                <div class="product-grid-wrapper">
+                    <!-- Product list start here -->
+                    @foreach (var item in Model)
+                    {
+                        <!-- Single product -->
+                        <div class="product-grid-product-wrapper">
+                            <div class="product-grid-product">
+                                <div class="product-grid-img-wrapper">
+                                    <img src="@Url.Action("GetImage", "Catalog", new { img = item.Id })" alt="Img" class="product-grid-img" />
+                                </div>
+                                <span class="product-grid-title">@item.Description</span>
+                                <span class="product-grid-price">@item.Price &#8381</span>
+                                <div class="form-inline justify-content-end">
+                                    <span class="product-grid-btn product-grid-view"><i class="fa fa-cart-arrow-down"></i></span>
+                                    <span class="product-grid-btn product-grid-view"><i class="fa fa-heart"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <!-- end Single product -->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

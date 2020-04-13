@@ -1,0 +1,81 @@
+﻿@model test.Models.ViewModels.LoginViewModel
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="login-form ml-lg-5" id="">
+                <h5>Войти через электронную почту</h5>
+                <hr class="divider" />
+                <form class="form-horizontal" method="post" asp-controller="Account" asp-action="Login">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="Login.Email" placeholder="Адрес электронной почты" />
+                        <span id="warning" asp-validation-for="Login.Email"></span>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" asp-for="Login.Password" placeholder="Пароль" />
+                        <span id="warning" asp-validation-for="Login.Password"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <a asp-action="ForgotPassword" asp-controller="Account">Забыли пароль?</a>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-default" value="Войти" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="login-form ml-lg-5" id="">
+                <h5>Регистрация клиента</h5>
+                <form method="post" asp-controller="Account" asp-action="Register">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div>
+                        <p>Поля, содержащие * обязательны для заполнения</p>
+                    </div>
+                    <div>
+                        <input class="form-control" asp-for="Register.Name" placeholder="Имя*" />
+                        <span id="warning" asp-validation-for="Register.Name"></span>
+                    </div>
+                    <div>
+                        <input class="form-control" asp-for="Register.Surname" placeholder="Фамилия*" />
+                        <span id="warning" asp-validation-for="Register.Surname"></span>
+                    </div>
+                    <div>
+                        <input class="form-control" asp-for="Register.Patronymic" placeholder="Отчество" />
+                        <span id="warning" asp-validation-for="Register.Patronymic"></span>
+                    </div>
+                    <div>
+                        <input class="form-control" asp-for="Register.Email" placeholder="Адрес электронной почты*" />
+                        <span id="warning" asp-validation-for="Register.Email"></span>
+                    </div>
+                    <div>
+                        <p>Пароль должен содержать 8 символов или более</p>
+                    </div>
+                    <div>
+                        <input class="form-control" asp-for="Register.Password" placeholder="Пароль*" />
+                        <span id="warning" asp-validation-for="Register.Password"></span>
+                    </div>
+                    <div>
+                        <input class="form-control" asp-for="Register.ConfirmPassword" placeholder="Повторите пароль*" />
+                        <span id="warning" asp-validation-for="Register.ConfirmPassword"></span>
+                    </div>
+
+                    <div>
+                        <input class="form-control" asp-for="Register.Phonenumber" placeholder="Телефон" />
+                        <span id="warning" asp-validation-for="Register.Phonenumber"></span>
+                    </div>
+                    <div>
+                        <input type="submit" class="btn btn-default" value="Регистрация" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - test</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" />
+</head>
+<body>
+    <header style="box-shadow: 0 3px 5px 0 rgba(0,0,0,.4);">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white ml-auto main-header">
+            <div class="container">
+                <!-- Search form -->
+                <form class="form-inline d-flex justify-content-center md-form form-sm active-cyan active-cyan-2 mt-0">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search">
+                </form>
+                <a class="navbar-brand" style="width: 100%" asp-area="" asp-controller="Home" asp-action="Index">TWELVE</a>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse ">
+                    <ul class="navbar-nav flex-grow-1 justify-content-end">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle menu-user mr-3" data-toggle="dropdown"><b class="caret"></b><span class="fa fa-user" style="color:black"></span></a>
+                            <ul class="dropdown-menu  account-menu">
+                                <li>
+                                    @User.Identity.Name
+                                </li>
+                                <li>
+                                    <form method="post" asp-controller="Account" asp-action="Userinfo" asp-route-name="@User.Identity.Name">
+                                        <div class="input-container">
+                                            <i class="fa fa-user-circle"></i>
+                                            <input type="submit" value="Аккаунт" class="btn btn-link" style="color:black;padding-top: 0px;" />
+                                        </div>
+                                    </form>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <form method="post" asp-controller="Account" asp-action="Logout">
+                                        <div class="input-container">
+                                            <i class="fa fa-sign-out-alt"></i>
+                                            <input type="submit" value="Выход" class="btn btn-link" style="color:black;padding-top: 0px;" />
+                                        </div>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="mr-3" asp-area="" asp-controller="Account" asp-action="Login"><span class="fa fa-sign-in-alt"></span></a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="mr-3" asp-area="" asp-controller="Account" asp-action="Favorite"><span class="fa fa-heart"></span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="mr-3" asp-controller="Account" asp-action="Busket" asp-route-username="@User.Identity.Name"><span class="fa fa-shopping-basket"></span></a>
+                          
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white mb-3 ml-auto main-header">
+            <div>
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark ml-lg-5"  id="sidebarCollapse"><span class="fa fa-align-justify" style="margin-right: 10px;"></span>Каталог</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark ml-lg-5" asp-controller="Catalog" asp-action="Index">Коллекции</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark ml-lg-5" asp-area="" asp-controller="Home" asp-action="About">О бренде</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark ml-lg-5" asp-area="" asp-controller="Home" asp-action="Contacts">Контакты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark ml-lg-5" asp-area="" asp-controller="Home" asp-action="Send">Доставка</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+   
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="bg-white active">
+            <div class="sidebar-header">
+                <h4>Категории</h4>
+            </div>
+            <h6 class="ml-2" style="color: red;">-50% на всю коллекцию</h6>
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a asp-controller="Catalog" asp-action="Index">Новинки</a>
+                </li>
+                <li>
+                    <a asp-controller="Catalog" asp-action="Blazers">Блейзеры</a>
+                </li>
+                <li>
+                    <a asp-controller="Catalog" asp-action="Pants">Брюки</a>
+                </li>
+                <li>
+                    <a asp-controller="Catalog" asp-action="Vests">Жилеты</a>
+                </li>
+                <li>
+                    <a asp-controller="Catalog" asp-action="Costumes" >Костюмы</a>
+                </li>
+                <li>
+                    <a asp-controller="Catalog" asp-action="Coats">Куртки и пальто</a>
+                </li>
+                <li>
+                    <a asp-controller="Catalog" asp-action="Dresses">Платья</a>
+                </li>
+                <li>
+                    <a asp-controller="Catalog" asp-action="Shirts">Рубашки</a>
+                </li>
+                <li>
+                    <a asp-controller="Catalog" asp-action="Tops">Топы</a>
+                </li>
+                <li>
+                    <a asp-controller="Catalog" asp-action="Trenchs">Тренчи</a>
+                </li>
+                <li>
+                    <a asp-controller="Catalog" asp-action="Shorts">Шорты</a>
+                </li>
+                <li>
+                    <a asp-controller="Catalog" asp-action="Skirts">Юбки</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Page Content -->
+        <div id="content">
+            
+            <div class="container">
+                <partial name="_CookieConsentPartial" />
+                <main role="main" class="pb-3">
+                    @await Html.PartialAsync("_StatusMessage")
+                    @RenderBody()
+                </main>
+            </div>
+
+            <footer class="footer text-muted pt-lg-5">
+                <div class="container">
+                    <div class="row footer-menu">
+                        <div class="col-md-3">
+                            <h6>ИНФОРМАЦИЯ, ПОМОЩЬ</h6>
+                            <ul class="navbar-nav flex-grow-1 justify-content-end">
+                                <li>
+                                    <a asp-controller="Home" asp-action="Help" class="text-dark">Помощь</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Home" asp-action="Send" class="text-dark">Доставка и возврат</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Home" asp-action="Payment" class="text-dark">Платеж</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <h6>ПОДРОБНЕЕ О НАС</h6>
+                            <ul class="navbar-nav flex-grow-1 justify-content-end">
+                                <li>
+                                    <a asp-controller="Home" asp-action="About" class="text-dark">Сведения о компании</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Home" asp-action="Agreement" class="text-dark">Условия и положения</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <h6>ПЛАТЕЖ</h6>
+                            <ul class="navbar-nav flex-grow-1 justify-content-end">
+                                <li>
+                                    <a class="text-dark">Безопасность платежей</a>
+                                </li>
+                                <li>
+                                    <a class="text-dark">Условия платежа</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <h6>ВАШ АККАУНТ</h6>
+                            <ul class="navbar-nav flex-grow-1 justify-content-end">
+                                <li>
+                                    <a asp-controller="User" asp-action="Info" class="text-dark">Личный кабинет</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Account" asp-action="Busket" class="text-dark">Корзина</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Account" asp-action="Favorite" class="text-dark">Избранные товары</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
+        </script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

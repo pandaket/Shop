@@ -1,0 +1,69 @@
+﻿@model X.PagedList.IPagedList<test.Models.Busket>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Mvc.Common;
+@{ 
+    double? itogo = 0;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Корзина</title>
+</head>
+<body>
+    <h5> КОРЗИНА </h5>
+    <table id="" class="table table-hover basket-table mt-4">
+        <caption class="text-right">Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount</caption>
+        <thead class="">
+            <tr>
+                @*<th scope="col" class="text-center">ID</th>*@
+                <th scope="col" class="text-center">Артикул</th>
+                <th scope="col" class="text-center"></th>
+                <th scope="col" class="text-center">Кол-во</th>
+                <th scope="col" class="text-center">Размер</th>
+                <th scope="col" class="text-center">Цена</th>
+                <th scope="col" class="text-center"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        <img src="@Url.Action("GetImage", "Account", new { img = item.SelectedProduct.Id })" style="max-height: 30%; max-width: 50%">
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SelectedProduct.Description)
+                    </td>
+                    <td class="text-center">
+                        @Html.EditorFor(modelItem => item.Kol, new { htmlAttributes = new { @style = "max-width:50px; text-align: center;" } })
+                    </td>
+                    <td class="text-center">
+                        @{
+                            var selectList = new SelectList(new string[] { "XS", "S", "M", "L", "XL" });
+                        }
+                        @Html.DropDownListFor(modelItem => item.Size, selectList, new { @style = "max-width:50px; text-align: center; text-align-last: center; " })
+                    </td>
+                    <td class="text-center">
+                        <b>@Html.DisplayFor(modelItem => item.SelectedProduct.Price) &#8381</b>
+                        @{itogo = itogo + item.SelectedProduct.Price;
+                        }
+                    </td>
+                    <td class="text-center">
+                        <a asp-controller="Account" asp-action="DeleteProduct" asp-route-id="@item.Id"><span class="fa fa-trash-alt"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row justify-content-end">
+        <h5>ИТОГО</h5>
+        <b class="ml-5 mr-5">@itogo &#8381 </b>
+    </div>
+    <div class="row justify-content-end">
+        <a class="btn bg-beige mr-5 mt-2" style="width: 230px; border-color:black">Оплатить</a>
+    </div>
+</body>
+</html>
