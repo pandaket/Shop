@@ -1,0 +1,102 @@
+﻿@model test.Models.ViewModels.Checkout;
+@{
+    double? itogo = 0;
+    @foreach (var item in Model.Busket)
+    {
+        itogo += item.SelectedProduct.Price;
+    }
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Checkout</title>
+</head>
+<body>
+    <form asp-action="Checkout" method="post">
+        <div class="row">
+            <div class="col-xl-6 col-md-6">
+                <div class="card bg-beige">
+                    <div class="card-header">Информация о покупке</div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            @foreach (var item in Model.Busket)
+                            {
+                                <li class="list-group-item" style="background: none">@item.SelectedProduct.Description (@item.Size)</li>
+                            }
+                        </ul>
+                        <br />
+                        <h5 class="text-right">К оплате: @itogo  &#8381</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card bg-beige">
+                    <div class="card-header">Информация о доставке</div>
+                    <div class="card-body">
+                        <table class="table table-borderless">
+                            <thead style="display: none">
+                                <tr>
+                                    <th style="min-width: 150px"></th>
+                                    <th style="min-width: 50px"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        ФИО
+                                    </td>
+                                    <td>
+                                        <div class="form-control">
+                                            @Model.User.getFio()
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Телефон
+                                    </td>
+                                    <td>
+                                        <div class="form-control">
+                                            @Model.User.Phonenumber
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Адрес доставки
+                                    </td>
+                                    <td>
+                                        <div class="form-control">
+                                            @Model.User.Address
+                                        </div>
+                                        <small>*Исправить информацию можно в личном кабинете</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Способ оплаты
+                                    </td>
+                                    <td>
+                                        <select id="payment" name="payment" class="custom-select">
+                                            <option value="0" selected>Наличными</option>
+                                            <option value="1">Картой</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12 text-right">
+                <a asp-action="Busket" class="btn btn-outline-beige">Отменить</a>
+                <button type="submit" class="btn btn-outline-beige">Оплатить</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

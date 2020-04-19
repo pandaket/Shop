@@ -8,9 +8,12 @@ using System.Linq;
 using test.Extensions.Alerts;
 using X.PagedList;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace test.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<Users> _userManager;
@@ -144,9 +147,11 @@ namespace test.Controllers
             return View(model);
         }
 
-        public IActionResult Busket(string username, int page=1)
+        public IActionResult Busket(int page=1)
         {
-            var rr = _context.Busket.Include(b=>b.Customer).Include(b=>b.SelectedProduct).ToList();
+            string username = _signInManager.Context.User.Identity.Name;
+            var me = _context.Users.Where(u => u.Email == username).Select(u => u.Id).FirstOrDefault();
+            var rr = _context.Busket.Include(b=>b.Customer).Include(b=>b.SelectedProduct).Where(b=>b.Iduser==me).ToList();
             int pageSize = Convert.ToInt32(Request.Cookies["pageCount"]);
             if (pageSize < 10)
             {
@@ -179,6 +184,93 @@ namespace test.Controllers
             else
             {
                 return RedirectToAction("Busket", "Account").WithDanger("Ошибка", "");
+            }
+        }
+
+        public IActionResult Checkout()
+        {
+            string username = _signInManager.Context.User.Identity.Name;
+            var me = _context.Users.Where(u => u.Email == username).Select(u => u.Id).FirstOrDefault();
+            var busket = _context.Busket.Include(b => b.Customer).Include(b => b.SelectedProduct).Where(b => b.Iduser == me).ToList();
+            var user = _context.Users.Where(u => u.Id == me).FirstOrDefault();
+            Checkout ch = new Checkout() { Busket = busket, User = user };
+            return View(ch);
+        }
+
+        [HttpPost]
+        public IActionResult Checkout(IFormCollection col)
+        {
+            var payment = Convert.ToInt32(col["payment"].ToString());
+            string username = _signInManager.Context.User.Identity.Name;
+            var me = _context.Users.Where(u => u.Email == username).Select(u => u.Id).FirstOrDefault();
+            var busket = _context.Busket.Include(b => b.Customer).Include(b => b.SelectedProduct).Where(b => b.Iduser == me).ToList();
+            var user = _context.Users.Where(u => u.Id == me).FirstOrDefault();
+            foreach(var b in busket)
+            {
+                Orders o = new Orders()
+                {
+                    IdProduct = b.IdProduct,
+                    Kol = b.Kol,
+                    Size = b.Size,
+                    Iduser = me,
+                    Payment = payment,
+                    Status = 1
+                };
+                _context.Orders.Add(o);
+                _context.Busket.Remove(b);
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Index","Home").WithSuccess("Успешно","Покупка выполнена");
+        }
+
+        public IActionResult Orders(int page = 1)
+        {
+            string username = _signInManager.Context.User.Identity.Name;
+            var me = _context.Users.Where(u => u.Email == username).Select(u => u.Id).FirstOrDefault();
+            var rr = _context.Orders.Include(o=>o.SelectedProduct).Include(o=>o.OrderStatus).Where(o => o.Iduser == me).ToList();
+            int pageSize = Convert.ToInt32(Request.Cookies["pageCount"]);
+            if (pageSize < 5)
+            {
+                pageSize = 5;
+            }
+            PagedList<Orders> model = new PagedList<Orders>(rr, page, pageSize);
+            return View(model);
+        }
+
+        // GET: User/Info
+        public IActionResult Info()
+        {
+            var me = _signInManager.Context.User.Identity.Name;
+            var info = _context.Users.Where(u => u.Email == me).FirstOrDefault();
+            return View(info);
+        }
+
+        // GET: User/Edit
+        public IActionResult Edit()
+        {
+            var me = _signInManager.Context.User.Identity.Name;
+            var info = _context.Users.Where(u => u.Email == me).FirstOrDefault();
+            return View(info);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Users model)
+        {
+            try
+            {
+                var user = await _userManager.FindByNameAsync(model.Email.ToString());
+                user.Surname = model.Surname;
+                user.Name = model.Name;
+                user.Patronymic = model.Patronymic;
+                user.Born = model.Born;
+                user.Phonenumber = model.Phonenumber;
+                user.Address = model.Address;
+                var result = await _userManager.UpdateAsync(user);
+                return RedirectToAction("Info", "Account").WithSuccess("Успешно", "");
+            }
+            catch (Exception exc)
+            {
+                return RedirectToAction("Edit", "Account").WithDanger("Ошибка", exc.InnerException.Message);
             }
         }
     }

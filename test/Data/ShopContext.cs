@@ -46,5 +46,7 @@ namespace test
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Productsize> Productsizes { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<OrderStatus> OrderStatus { get; set; }
     }
 }

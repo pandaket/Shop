@@ -1,0 +1,70 @@
+﻿@model test.Models.Users;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <form method="post" asp-action="Edit">
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <a asp-controller="Account" asp-action="Info" class="btn btn-outline-beige mr-3">Назад</a>
+                <button type="submit" class="btn btn-outline-beige mr-3">Сохранить</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4" name="photo-block">
+                <div style="margin-top: 10px">
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            <img src="~/img/avatar_2x.png" class="rounded-circle" alt="avatar" />
+                        </div>
+                        <div class="col-md-12">
+                            <h6>Загрузите другое фото...</h6>
+                        </div>
+                        <div class="col-md-12">
+                            <input type="file" class="text-center center-block file-upload">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td style="width: 200px; "><b>Логин (e-mail)</b></td>
+                            <td><input readonly asp-for="Email" class="form-control" placeholder="" value="@Model.Email" /></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 200px"><b>Фамилия</b></td>
+                            <td><input asp-for="Surname" class="form-control" placeholder="" value="@Model.Surname" /></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 200px"><b>Имя</b></td>
+                            <td><input asp-for="Name" class="form-control" placeholder="" value="@Model.Name" /></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 200px"><b>Отчество</b></td>
+                            <td><input asp-for="Patronymic" class="form-control" placeholder="" value="@Model.Patronymic" /></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 200px"><b>Дата рождения</b></td>
+                            <td><input asp-for="Born" id="born" class="form-control" placeholder="" value="@Model.Born" /></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 200px"><b>Телефон</b></td>
+                            <td><input asp-for="Phonenumber" id="phone" class="form-control" placeholder="" value="@Model.Phonenumber" /></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 200px"><b>Адрес</b></td>
+                            <td><input asp-for="Address" id="address" class="form-control" placeholder="" value="@Model.Address" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

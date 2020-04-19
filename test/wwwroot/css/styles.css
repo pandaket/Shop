@@ -453,3 +453,8 @@ body {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
+small{
+    font-style:italic;
+    font-weight: 700;
+}

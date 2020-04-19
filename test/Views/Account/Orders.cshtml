@@ -1,0 +1,40 @@
+﻿@model X.PagedList.IPagedList<test.Models.Orders>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Mvc.Common;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Orders</title>
+</head>
+<body>
+    <h5> Мои заказы </h5>
+    <table id="" class="table table-hover basket-table mt-4">
+        <caption class="text-right">Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount</caption>
+        <thead class="">
+            <tr>
+                @*<th scope="col" class="text-center">ID</th>*@
+                <th scope="col" class="text-center">Товар</th>
+                <th scope="col" class="text-center">Кол-во</th>
+                <th scope="col" class="text-center">Размер</th>
+                <th scope="col" class="text-center">Цена</th>
+                <th scope="col" class="text-center">Статус</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">@item.SelectedProduct.Description</td>
+                    <td class="text-center">@item.Kol</td>
+                    <td class="text-center">@item.Size</td>
+                    <td class="text-center">@item.SelectedProduct.Price</td>
+                    <td class="text-center">@item.OrderStatus.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

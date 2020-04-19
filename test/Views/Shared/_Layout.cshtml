@@ -40,11 +40,20 @@
                                 <li>
                                     @User.Identity.Name
                                 </li>
+
                                 <li>
-                                    <form method="post" asp-controller="Account" asp-action="Userinfo" asp-route-name="@User.Identity.Name">
+                                    <form method="get" asp-controller="Account" asp-action="Info">
                                         <div class="input-container">
                                             <i class="fa fa-user-circle"></i>
                                             <input type="submit" value="Аккаунт" class="btn btn-link" style="color:black;padding-top: 0px;" />
+                                        </div>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form method="get" asp-controller="Account" asp-action="Orders">
+                                        <div class="input-container">
+                                            <i class="fa fa-shopping-bag"></i>
+                                            <input type="submit" value="Заказы" class="btn btn-link" style="color:black;padding-top: 0px;" />
                                         </div>
                                     </form>
                                 </li>
@@ -70,7 +79,7 @@
                             <a class="mr-3" asp-area="" asp-controller="Account" asp-action="Favorite"><span class="fa fa-heart"></span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="mr-3" asp-controller="Account" asp-action="Busket" asp-route-username="@User.Identity.Name"><span class="fa fa-shopping-basket"></span></a>
+                            <a class="mr-3" asp-controller="Account" asp-action="Busket"><span class="fa fa-shopping-basket"></span></a>
                           
                         </li>
                     </ul>
@@ -200,7 +209,7 @@
                             <h6>ВАШ АККАУНТ</h6>
                             <ul class="navbar-nav flex-grow-1 justify-content-end">
                                 <li>
-                                    <a asp-controller="User" asp-action="Info" class="text-dark">Личный кабинет</a>
+                                    <a asp-controller="Account" asp-action="Info" class="text-dark">Личный кабинет</a>
                                 </li>
                                 <li>
                                     <a asp-controller="Account" asp-action="Busket" class="text-dark">Корзина</a>
