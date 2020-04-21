@@ -27,11 +27,14 @@ namespace test.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
+
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Register(LoginViewModel model)
         {
@@ -48,6 +51,7 @@ namespace test.Controllers
                     Surname = model.Register.Surname,
                     Patronymic = model.Register.Patronymic,
                     Phonenumber = model.Register.Phonenumber,
+                    Address = string.Empty,
                     SecurityStamp = Guid.NewGuid().ToString()
                 };
                 // добавляем пользователя
@@ -60,19 +64,21 @@ namespace test.Controllers
                 }
                 catch (Exception msg)
                 {
-                    return View().WithDanger("Ошибка при регистрации", msg.InnerException.Message);
+                    return RedirectToAction("Login", "Account").WithDanger("Ошибка при регистрации", msg.InnerException.Message);
                 }
              
             }
             return View(model);
         }
 
+        [AllowAnonymous]
         // GET: /<controller>/
         public IActionResult Login()
         {
             return View(new LoginViewModel());
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
