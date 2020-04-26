@@ -1,7 +1,75 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Twelve - Интернет-магазин";
 }
 
-<div class="text-center">
-    <img src="~/img/paris.jpg" class="img-fluid" alt="Responsive image">
+<div class="row">
+    <div class="col-xl-12 col-md-12 text-center">
+        <div class="card">
+            <!-- Изображение (фон карточки) -->
+            <img class="card-img" src="~/img/sale1.png" alt="...">
+            <div class="card-img-overlay" style="margin-top: 140px">
+                <span class="title-text-white">SALE 50%</span>
+                <br />
+                <span style="font-size: 20px; color:white">НА ЗИМНЮЮ КОЛЛЕКЦИЮ</span>
+                <br />
+                <a asp-action="Index" asp-controller="Catalog" class="btn btn-outline-light" style="width: 300px; font-size: 16px; margin-top: 50px; color: white">Посмотреть</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col-md-6">
+        <div class="card">
+            <!-- Изображение (фон карточки) -->
+            <img class="card-img" src="~/img/costumes1.png" alt="...">           
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <!-- Изображение (фон карточки) -->
+            <img class="card-img" src="~/img/shirts1.png" alt="...">            
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card" style="border: none; background: none">
+            <div class="card-body text-center">
+                <h3 style="font-weight: 500">Костюмы</h3>
+                <h6 style="font-size: 14px; font-weight: 700">Идеальная строгость</h6>
+                <a asp-action="Costumes" asp-controller="Catalog" class="btn main-btn mt-1">Посмотреть</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card" style="border: none; background: none">
+            <div class="card-body text-center">
+                <h3 style="font-weight: 500">Рубашки</h3>
+                <h6 style="font-size: 14px; font-weight: 700">Красота в простоте</h6>
+                <a asp-action="Shirts" asp-controller="Catalog" class="btn main-btn mt-1">Посмотреть</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col-md-6">
+        <div class="card" style="border: none; background: none">
+            <img class="card-img" src="~/img/coll1.png" alt="...">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card" style="border: none; background: none">
+            <div class="card-body text-center">
+                <div style="height: 200px"></div>
+                <h1 style="font-weight: 500">ВЕСНА-ЛЕТО 2020</h1>
+                <h6 class="main-page-text text-justify">
+                    Удивительно, но будущей весной вы можете носить любые тренды из текущих, будь то кожа, неон, мини, перья или костюмы с шортами. Однако абсолютно очевидны
+                    несколько совершенно новых направлений: появлений: появление турнюров, увлечение историей
+                    искусства, крюнолинов новая откровенность и
+                    сесуальность, гипертрофированная «вечерка»
+                </h6>
+                <a asp-action="Index" asp-controller="Catalog" class="btn main-btn mt-1">Ознакомится с коллекцией</a>
+            </div>
+        </div>
+    </div>
 </div>

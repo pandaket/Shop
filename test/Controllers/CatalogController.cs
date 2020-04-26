@@ -23,9 +23,16 @@ namespace test.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            return View();
+            var rr = _context.Products.Include(b => b.ProductCategory).Take(18).OrderByDescending(d=>d.Id).ToList();
+            int pageSize = Convert.ToInt32(Request.Cookies["pageCount"]);
+            if (pageSize < 9)
+            {
+                pageSize = 9;
+            }
+            PagedList<Products> model = new PagedList<Products>(rr, page, pageSize);
+            return View(model);
         }
 
         [HttpGet]
@@ -33,9 +40,9 @@ namespace test.Controllers
         {
             var rr = _context.Products.Include(b => b.ProductCategory).Where(b=>b.Category==1).ToList();
             int pageSize = Convert.ToInt32(Request.Cookies["pageCount"]);
-            if (pageSize < 10)
+            if (pageSize < 9)
             {
-                pageSize = 10;
+                pageSize = 9;
             }
             PagedList<Products> model = new PagedList<Products>(rr, page, pageSize);
             return View(model);
@@ -44,11 +51,11 @@ namespace test.Controllers
         [HttpGet]
         public IActionResult Coats(int page = 1)
         {
-            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 2).ToList();
+            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 5).ToList();
             int pageSize = Convert.ToInt32(Request.Cookies["pageCount"]);
-            if (pageSize < 10)
+            if (pageSize < 9)
             {
-                pageSize = 10;
+                pageSize = 9;
             }
             PagedList<Products> model = new PagedList<Products>(rr, page, pageSize);
             return View(model);
@@ -57,11 +64,11 @@ namespace test.Controllers
         [HttpGet]
         public IActionResult Costumes(int page = 1)
         {
-            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 3).ToList();
+            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 4).ToList();
             int pageSize = Convert.ToInt32(Request.Cookies["pageCount"]);
-            if (pageSize < 10)
+            if (pageSize < 9)
             {
-                pageSize = 10;
+                pageSize = 9;
             }
             PagedList<Products> model = new PagedList<Products>(rr, page, pageSize);
             return View(model);
@@ -70,11 +77,11 @@ namespace test.Controllers
         [HttpGet]
         public IActionResult Dresses(int page = 1)
         {
-            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 4).ToList();
+            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 6).ToList();
             int pageSize = Convert.ToInt32(Request.Cookies["pageCount"]);
-            if (pageSize < 10)
+            if (pageSize < 9)
             {
-                pageSize = 10;
+                pageSize = 9;
             }
             PagedList<Products> model = new PagedList<Products>(rr, page, pageSize);
             return View(model);
@@ -83,11 +90,11 @@ namespace test.Controllers
         [HttpGet]
         public IActionResult Pants(int page = 1)
         {
-            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 5).ToList();
+            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 2).ToList();
             int pageSize = Convert.ToInt32(Request.Cookies["pageCount"]);
-            if (pageSize < 10)
+            if (pageSize < 9)
             {
-                pageSize = 10;
+                pageSize = 9;
             }
             PagedList<Products> model = new PagedList<Products>(rr, page, pageSize);
             return View(model);
@@ -96,11 +103,11 @@ namespace test.Controllers
         [HttpGet]
         public IActionResult Shirts(int page = 1)
         {
-            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 6).ToList();
+            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 7).ToList();
             int pageSize = Convert.ToInt32(Request.Cookies["pageCount"]);
-            if (pageSize < 10)
+            if (pageSize < 9)
             {
-                pageSize = 10;
+                pageSize = 9;
             }
             PagedList<Products> model = new PagedList<Products>(rr, page, pageSize);
             return View(model);
@@ -109,11 +116,11 @@ namespace test.Controllers
         [HttpGet]
         public IActionResult Shorts(int page = 1)
         {
-            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 7).ToList();
+            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 10).ToList();
             int pageSize = Convert.ToInt32(Request.Cookies["pageCount"]);
-            if (pageSize < 10)
+            if (pageSize < 9)
             {
-                pageSize = 10;
+                pageSize = 9;
             }
             PagedList<Products> model = new PagedList<Products>(rr, page, pageSize);
             return View(model);
@@ -122,11 +129,11 @@ namespace test.Controllers
         [HttpGet]
         public IActionResult Skirts(int page = 1)
         {
-            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 8).ToList();
+            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 11).ToList();
             int pageSize = Convert.ToInt32(Request.Cookies["pageCount"]);
-            if (pageSize < 10)
+            if (pageSize < 9)
             {
-                pageSize = 10;
+                pageSize = 9;
             }
             PagedList<Products> model = new PagedList<Products>(rr, page, pageSize);
             return View(model);
@@ -134,6 +141,19 @@ namespace test.Controllers
 
         [HttpGet]
         public IActionResult Tops(int page = 1)
+        {
+            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 8).ToList();
+            int pageSize = Convert.ToInt32(Request.Cookies["pageCount"]);
+            if (pageSize < 9)
+            {
+                pageSize = 9;
+            }
+            PagedList<Products> model = new PagedList<Products>(rr, page, pageSize);
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Trenchs(int page = 1)
         {
             var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 9).ToList();
             int pageSize = Convert.ToInt32(Request.Cookies["pageCount"]);
@@ -146,26 +166,13 @@ namespace test.Controllers
         }
 
         [HttpGet]
-        public IActionResult Trenchs(int page = 1)
-        {
-            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 10).ToList();
-            int pageSize = Convert.ToInt32(Request.Cookies["pageCount"]);
-            if (pageSize < 10)
-            {
-                pageSize = 10;
-            }
-            PagedList<Products> model = new PagedList<Products>(rr, page, pageSize);
-            return View(model);
-        }
-
-        [HttpGet]
         public IActionResult Vests(int page = 1)
         {
-            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 11).ToList();
+            var rr = _context.Products.Include(b => b.ProductCategory).Where(b => b.Category == 3).ToList();
             int pageSize = Convert.ToInt32(Request.Cookies["pageCount"]);
-            if (pageSize < 10)
+            if (pageSize < 9)
             {
-                pageSize = 10;
+                pageSize = 9;
             }
             PagedList<Products> model = new PagedList<Products>(rr, page, pageSize);
             return View(model);

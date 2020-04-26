@@ -82,21 +82,28 @@ namespace test.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Users us = _context.Users.Where(u => u.PasswordHash == model.Login.Password && u.Email == model.Login.Email).FirstOrDefault();
-                if (us != null)
+                if (ModelState.IsValid)
                 {
-                    await _signInManager.SignInAsync(us, false);
-                    return RedirectToAction("Index", "Home");
+                    Users us = _context.Users.Where(u => u.PasswordHash == model.Login.Password && u.Email == model.Login.Email).FirstOrDefault();
+                    if (us != null)
+                    {
+                        await _signInManager.SignInAsync(us, false);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        return View().WithDanger("Ошибка входа", "Неправильный логин и(или) пароль");
+                    }
+
                 }
-                else
-                {
-                    return View().WithDanger("Ошибка входа","Неправильный логин и(или) пароль");
-                }
-                
+                return View(model);
             }
-            return View(model);
+            catch
+            {
+                return View().WithDanger("Ошибка входа", "Неправильный логин и(или) пароль");
+            }
         }
 
         [HttpPost]
@@ -277,6 +284,34 @@ namespace test.Controllers
             catch (Exception exc)
             {
                 return RedirectToAction("Edit", "Account").WithDanger("Ошибка", exc.InnerException.Message);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult ChangeBusketItem(int id, string param, string value)
+        {
+            Busket b = new Busket();
+            try
+            {
+                switch (param)
+                {
+                    case "size":
+                        b = _context.Busket.Where(bu => bu.Id == id).FirstOrDefault();
+                        b.Size = value;
+                        _context.Busket.Update(b);
+                        break;
+                    case "kol":
+                        b = _context.Busket.Where(bu => bu.Id == id).FirstOrDefault();
+                        b.Kol = Convert.ToInt32(value);
+                        _context.Busket.Update(b);
+                        break;
+                }
+                _context.SaveChanges();
+                return new JsonResult(new { Status = 0 });
+            }
+            catch
+            {
+                return new JsonResult(new { Status = 1 });
             }
         }
     }

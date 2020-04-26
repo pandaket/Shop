@@ -1,11 +1,16 @@
-﻿
-
+﻿@model X.PagedList.IPagedList<test.Models.Products>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Mvc.Common;
+@{
+    ViewData["Title"] = "Костюмы";
+}
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Blazers</title>
+    <title>Костюмы</title>
 </head>
 <body>
     <div class="row">
@@ -107,13 +112,41 @@
                                 <span class="product-grid-title">@item.Description</span>
                                 <span class="product-grid-price">@item.Price &#8381</span>
                                 <div class="form-inline justify-content-end">
-                                    <span class="product-grid-btn product-grid-view"><i class="fa fa-cart-arrow-down"></i></span>
-                                    <span class="product-grid-btn product-grid-view"><i class="fa fa-heart"></i></span>
+                                    <a asp-controller="Catalog" asp-action="AddBusket" asp-route-id="@item.Id" asp-route-returnaction="Costumes"><span class="product-grid-btn product-grid-view"><i class="fa fa-cart-arrow-down"></i></span></a>
+                                    <a><span class="product-grid-btn product-grid-view"><i class="fa fa-heart"></i></span></a>
                                 </div>
                             </div>
                         </div>
                     }
                     <!-- end Single product -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-5">
+
+                </div>
+                <div class="col-md-6">
+                    @if (Model.PageSize >= 9 && Model.PageCount > 1)
+                    {
+                        <div class="text-right">
+                            @Html.PagedListPager(Model, page => Url.Action("Costumes", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+                       {
+                           LinkToFirstPageFormat = "<<",
+                           LinkToPreviousPageFormat = "<",
+                           LinkToNextPageFormat = ">",
+                           LinkToLastPageFormat = ">>",
+                           DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+                           DisplayLinkToPreviousPage = PagedListDisplayMode.Never,
+                           DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+                           DisplayLinkToNextPage = PagedListDisplayMode.Never,
+                           MaximumPageNumbersToDisplay = 5,
+                           DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+                       }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "some_grid_container" }))
+                        </div>
+                    }
                 </div>
             </div>
         </div>

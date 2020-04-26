@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Blazers</title>
+    <title>Шорты</title>
 </head>
 <body>
     <div class="row">
@@ -106,8 +106,8 @@
                                 <span class="product-grid-title">@item.Description</span>
                                 <span class="product-grid-price">@item.Price &#8381</span>
                                 <div class="form-inline justify-content-end">
-                                    <span class="product-grid-btn product-grid-view"><i class="fa fa-cart-arrow-down"></i></span>
-                                    <span class="product-grid-btn product-grid-view"><i class="fa fa-heart"></i></span>
+                                    <a asp-controller="Catalog" asp-action="AddBusket" asp-route-id="@item.Id" asp-route-returnaction="Shorts"><span class="product-grid-btn product-grid-view"><i class="fa fa-cart-arrow-down"></i></span></a>
+                                    <a><span class="product-grid-btn product-grid-view"><i class="fa fa-heart"></i></span></a>
                                 </div>
                             </div>
                         </div>

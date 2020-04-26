@@ -2,8 +2,9 @@
 @using X.PagedList;
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Mvc.Common;
-@{ 
+@{
     double? itogo = 0;
+    ViewData["Title"] = "Корзина";
 }
 
 <html>
@@ -13,10 +14,10 @@
 </head>
 <body>
     <h5> КОРЗИНА </h5>
-    <table id="" class="table table-hover basket-table mt-4">
+    <table id="main" class="table table-hover basket-table mt-4">
         <thead class="">
             <tr>
-                @*<th scope="col" class="text-center">ID</th>*@
+                <th scope="col" class="text-center hidden">ID</th>
                 <th scope="col" class="text-center">Артикул</th>
                 <th scope="col" class="text-center"></th>
                 <th scope="col" class="text-center">Кол-во</th>
@@ -29,6 +30,7 @@
             @foreach (var item in Model)
             {
                 <tr>
+                    <td id="itemid" class="hidden">@item.Id</td>
                     <td class="text-center">
                         <img src="@Url.Action("GetImage", "Account", new { img = item.SelectedProduct.Id })" style="max-height: 30%; max-width: 50%">
                     </td>
@@ -36,13 +38,18 @@
                         @Html.DisplayFor(modelItem => item.SelectedProduct.Description)
                     </td>
                     <td class="text-center">
-                        @Html.EditorFor(modelItem => item.Kol, new { htmlAttributes = new { @style = "max-width:50px; text-align: center;" } })
+                        @item.Kol
                     </td>
                     <td class="text-center">
                         @{
-                            var selectList = new SelectList(new string[] { "XS", "S", "M", "L", "XL" });
+                            var selectList = new List<SelectListItem>();
+                            selectList.Add(new SelectListItem { Text = "XS", Value = "XS", Selected = true });
+                            selectList.Add(new SelectListItem { Text = "S", Value = "S" });
+                            selectList.Add(new SelectListItem { Text = "M", Value = "M" });
+                            selectList.Add(new SelectListItem { Text = "L", Value = "L" });
+                            selectList.Add(new SelectListItem { Text = "XL", Value = "XL" });
                         }
-                        @Html.DropDownListFor(modelItem => item.Size, selectList, new { @style = "max-width:50px; text-align: center; text-align-last: center; " })
+                        @Html.DropDownListFor(modelItem => item.Size, selectList, new { @id = "itemSize", @onchange = "change()", @style = "max-width:50px; text-align: center; text-align-last: center; " })
                     </td>
                     <td class="text-center">
                         <b>@Html.DisplayFor(modelItem => item.SelectedProduct.Price) &#8381</b>
@@ -58,9 +65,9 @@
     </table>
     @if (Model.TotalItemCount == 0)
     {
-    <div class="text-center">
-        <i>Нет товаров в корзине</i>
-    </div>
+        <div class="text-center">
+            <i>Нет товаров в корзине</i>
+        </div>
     }
     <div class="row justify-content-end">
         <h5>ИТОГО</h5>
@@ -74,3 +81,39 @@
     </div>
 </body>
 </html>
+<script>
+    $(document).on("change", "select", function () {
+        if (this.value == null || this.value == "")
+            return
+        $("option[value=" + this.value + "]", this)
+            .attr("selected", true).siblings()
+            .removeAttr("selected");
+    });
+    $("tbody").on("click", "tr", function (e) {
+        $(this).attr("selected", "selected");
+        $(this).find("#itemSize").addClass("selected");
+        $(this).find("#itemid").addClass("selected");
+    });
+    function change() {
+        console.log('clicked');
+        var val = $("#itemSize.selected option:selected").text();
+        var i = $("#itemid.selected").text();
+        $.ajax({
+            type: 'POST',
+            url: '/Account/ChangeBusketItem',
+            data: {
+                id: i,
+                param: 'size',
+                value: val
+            },
+            success: function (data) {
+                if (data.status == "0")
+                    console.log("success");
+                if (data.status == "1")
+                    alert("Размер для товара не изменился. Обновите страницу и повторите попытку");
+
+            },
+            error: function (e) { console.log(e) }
+        })
+    };
+</script>
